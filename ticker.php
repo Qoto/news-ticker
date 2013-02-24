@@ -29,9 +29,13 @@ define('TICKER_MAX_INT', defined('PHP_INT_MAX') ? PHP_INT_MAX : 32767);
 define('PHPREQ',5);
 
 $phpver=phpversion();$phpmaj=$phpver[0];
+
 if($phpmaj>=PHPREQ){
-  require_once('rss.php');
- }
+	require_once('rss.php');
+}
+
+require_once('news-ticker_wpml.php'); 
+
 register_activation_hook( __FILE__, 'ticker_activate' );
 register_deactivation_hook( __FILE__, 'ticker_deactivate' );
 add_action('switch_theme', 'ticker_activate');
@@ -106,10 +110,10 @@ function ticker_content(){
      $items = array_slice($feed->items, 0, $maxnum);
      break;
    case 'comments':
-     $posts = ticker_use_rss($site_url."/?feed=comments-rss2");
+     $posts = ticker_use_rss(get_bloginfo('comments_rss2_url'));
      break;
    case 'entries':
-     $posts = ticker_use_rss($site_url."/?feed=rss2");
+     $posts = ticker_use_rss(get_bloginfo('rss2_url'));
      break;
    case 'norss':
      $posts = ticker_get_posts(
@@ -175,6 +179,7 @@ function ticker_recent_comments($src_count, $src_length) {
 			WHERE comment_approved = '1' AND comment_type = '' AND post_password = '' 
 			ORDER BY comment_date_gmt DESC 
 			LIMIT $src_count";
+	$sql = apply_filters('ticker-recent-comments',$sql);
 	$comments = $wpdb->get_results($sql);
 
 	foreach($comments as $comment){
@@ -211,6 +216,7 @@ function ticker_get_posts($type, $cat_filter, $n, $post_list=null){
 				array(
 					'numberposts' => TICKER_MAX_INT, 
 					'orderby' => 'post_date',
+					'suppress_filters' => 0,
 				)
 			);
 			
@@ -221,6 +227,7 @@ function ticker_get_posts($type, $cat_filter, $n, $post_list=null){
 				array(
 					'numberposts' => TICKER_MAX_INT,
 					'orderby' => 'comment_count',
+					'suppress_filters' => 0,
 				)
 			);
 			break;
@@ -229,7 +236,8 @@ function ticker_get_posts($type, $cat_filter, $n, $post_list=null){
 			$posts_tmp = get_posts(
 				array(
 					'numberposts' => TICKER_MAX_INT,
-					'include' => $post_list, 
+					'include' => $post_list,
+					'suppress_filters' => 0,
 				)
 			);
 			
@@ -251,6 +259,7 @@ function ticker_get_posts($type, $cat_filter, $n, $post_list=null){
 			break;
 	}
 	
+	$cat_filter = apply_filters('category-filter', $cat_filter);
 	if($cat_filter==null || sizeof($cat_filter)<1)
 		$do_category_filter = false;
 	else
