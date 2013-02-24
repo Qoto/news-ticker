@@ -3,7 +3,7 @@
 Contributors: DanielSachs
 Tags: news, ticker, fading, scrolling, rss, rss2, news feed, comments feed, news ticker, featured posts, gallery, image gallery
 Requires at least: 2.9
-Tested up to: 3.4.1
+Tested up to: 3.5.1
 Stable tag: 2.1.2
 
 An animated banner, news ticker, for Posts, RSS feeds or Images.
