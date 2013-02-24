@@ -4,7 +4,7 @@ Contributors: DanielSachs
 Tags: news, ticker, fading, scrolling, rss, rss2, news feed, comments feed, news ticker, featured posts, gallery, image gallery
 Requires at least: 2.9
 Tested up to: 3.4.1
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 
 An animated banner, news ticker, for Posts, RSS feeds or Images.
 
@@ -23,6 +23,7 @@ An animated banner, news ticker, for Posts, RSS feeds or Images.
 * Allows to add your default RSS feed, your Comments RSS or even an RSS feed from another site, like Twitter or your favorite news site.
 * Option to filter Posts from selected categories
 * Ticker Animation : Fade, Slide Up, Slide Down, Left, Right or Expand
+* WPML Support
 * And much more...
 
 To view this plugin in action visit [18elements homepage](http://18elements.com).
@@ -56,6 +57,10 @@ For more info [visit the plugin page](http://18elements.com/tools/news-ticker-fo
 1. The Setup Page
 
 == Changelog ==
+
+= 2.1.2 =
+
+* Added WPML support
 
 = 2.1.1 =
 
