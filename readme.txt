@@ -50,6 +50,7 @@ The news ticker comes with unique classes and id's for easy css styling
 
 Add these ids & classes to your themes CSS file for easy styling.
 For more info [visit the plugin page](http://18elements.com/tools/news-ticker-for-wordpress)
+Interested in contributing? [Fork it](https://github.com/DanielSachs/news-ticker) on GitHub. 
 
 
 == Screenshots ==
