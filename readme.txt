@@ -28,7 +28,6 @@ An animated banner, news ticker, for Posts, RSS feeds or Images.
 
 To view this plugin in action visit [18elements homepage](http://18elements.com).
 
-
 == Installation ==
 
 1. Upload `news-ticker` directory to the `/wp-content/plugins/` directory.
