@@ -682,11 +682,11 @@ tr.gre {
       
       
       <tr valign="top" class="post-extra gre">
-        <th scope="row"><?php _e( Post Selection:',  'news-ticker' ); ?></th>
+        <th scope="row"><?php _e( 'Post Selection:',  'news-ticker' ); ?></th>
         <td><input type="radio" name="<?php echo $type_opt_name; ?>" value='popular' <?php if($type_opt_val=='popular') { echo 'checked'; } ?>>
           <?php _e( 'Most Popular Posts over the last',  'news-ticker' ); ?>
           <input type="text" name="<?php echo $popular_days_opt_name; ?>" value="<?php echo $popular_days_opt_val; ?>" size="2">
-          days (<a href='http://wordpress.org/extend/plugins/stats/'>Wordpress.com Stats Plugin</a> <?php echo $stats_installed_str; ?>)<br/>
+          <?php _e( 'days',  'news-ticker' ); ?> (<a href='http://wordpress.org/extend/plugins/stats/'>Wordpress.com Stats Plugin</a> <?php echo $stats_installed_str; ?>)<br/>
           <input type="radio" name="<?php echo $type_opt_name; ?>" value='commented' <?php if($type_opt_val=='commented') { echo 'checked'; } ?>>
          <?php _e( 'Most Commented Posts',  'news-ticker' ); ?><br/>
           <input type="radio" name="<?php echo $type_opt_name; ?>" value='recent' <?php if($type_opt_val=='recent') { echo 'checked'; } ?>>
