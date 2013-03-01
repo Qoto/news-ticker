@@ -2,9 +2,6 @@
 ## A comprehensive news ticker plugin for WordPress
 
 
-***
-
-
 * Contributors: DanielSachs
 * WP version at least: 2.9
 * Tested up to: 3.5.1
