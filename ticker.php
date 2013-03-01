@@ -8,7 +8,7 @@ Author URI: http://18elements.com/
 Version: 2.1.1
 */
 /*  
-Copyright 2009 18elements.com  (email: hello@18elements.com)
+Copyright 2009-2013 18elements.com  (email: hello@18elements.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -626,7 +626,8 @@ tr.gre {
         <td>
           <?php $phpver=phpversion();$phpmaj=$phpver[0];
   if($phpmaj<PHPREQ){ ?>
-          Use of these options currently requires php version <?php echo PHPREQ;?>. Your current version is <?php echo $phpver;?>.<br /></td>
+          <?php _e( 'Use of these options currently requires php version ', 'news-ticker' ); ?><?php echo PHPREQ; ?>. 
+          <?php _e( 'Your current version is ', 'news-ticker' ); ?><?php echo $phpver;?>.<br /></td>
         <?php
  } else { 
 ?>
