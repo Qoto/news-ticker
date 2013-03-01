@@ -610,7 +610,7 @@ tr.gre {
 }
 </style>
   <div class="icon32" id="icon-options-general"><br></div>
-		<h2>News Ticker Options</h2>
+		<h2><?php _e( 'News Ticker Options',  'news-ticker' ); ?></h2>
 		<p></p>
         <hr />
   
@@ -619,27 +619,29 @@ tr.gre {
     
     
     <table class="form-table">
-        <tr class="header" valign="top"><th scope="row"><h3>Content Setup</h3></th></tr>
+        <tr class="header" valign="top"><th scope="row"><h3><?php _e( 'Content Setup',  'news-ticker' ); ?></h3></th></tr>
         
         <tr class="gre" valign="top">
-        <th scope="row">Content Source</th>
+        <th scope="row"><?php _e( 'Content Source',  'news-ticker' ); ?></th>
         <td>
           <?php $phpver=phpversion();$phpmaj=$phpver[0];
-  if($phpmaj<PHPREQ){?>
+  if($phpmaj<PHPREQ){ ?>
           Use of these options currently requires php version <?php echo PHPREQ;?>. Your current version is <?php echo $phpver;?>.<br /></td>
-        <?php }else{ ?>
+        <?php
+ } else { 
+?>
         
-        <input class="ruler" type="radio" name="<?php echo $rss_opt_name; ?>" value='norss' <?php if($rss_opt_val=='norss'){echo 'checked';} ?> >
-        Blog Posts<br/>
+        <input class="ruler" type="radio" name="<?php echo $rss_opt_name; ?>" value='norss' <?php if($rss_opt_val=='norss'){echo 'checked';} ?> > <?php _e( '
+        Blog Posts',  'news-ticker' ); ?><br/>
         <input class="ruler" type="radio" name="<?php echo $rss_opt_name; ?>" value='entries' <?php if($rss_opt_val=='entries'){echo 'checked';} ?>>
-        Local Entries RSS feed <br/>
+        <?php _e( 'Local Entries RSS feed',  'news-ticker' ); ?> <br/>
         <input class="ruler" type="radio" name="<?php echo $rss_opt_name; ?>" value='comments' <?php if($rss_opt_val=='comments'){echo 'checked';} ?>>
-        Local Comments RSS feed<br/>
+        <?php _e( 'Local Comments RSS feed',  'news-ticker' ); ?><br/>
         <input class="ruler" type="radio" name="<?php echo $rss_opt_name; ?>" value='external' <?php if($rss_opt_val=='external'){echo 'checked';} ?>>
-        External RSS feed<br/>
+        <?php _e( 'External RSS feed',  'news-ticker' ); ?><br/>
         <div class="external-extra">
-        External RSS Feed Url:        <input type="text" name="<?php echo $ext_rss_name; ?>" value="<?php echo $ext_rss_val; ?>" size="50" /><br/>
-        Number of entries to display: <input type="text" name="<?php echo $ext_rss_num_name; ?>" value="<?php echo $ext_rss_num_val; ?>" size="2" />
+        <?php _e( 'External RSS Feed Url:',  'news-ticker' ); ?>        <input type="text" name="<?php echo $ext_rss_name; ?>" value="<?php echo $ext_rss_val; ?>" size="50" /><br/>
+        <?php _e( 'Number of entries to display:',  'news-ticker' ); ?> <input type="text" name="<?php echo $ext_rss_num_name; ?>" value="<?php echo $ext_rss_num_val; ?>" size="2" />
         </div>
 
         </td>
@@ -652,9 +654,9 @@ tr.gre {
       
       
       <tr valign="top" class="post-extra">
-        <th scope="row">Category Filter:</th>
-        <td> Select the categories to include.  Select one or more categories to restrict post selection to those categories.<br />
-          If no category is selected, all categories are included  (Multiple selection)<br />
+        <th scope="row"><?php _e( 'Category Filter:',  'news-ticker' ); ?></th>
+        <td> <?php _e( 'Select the categories to include.  Select one or more categories to restrict post selection to those categories.',  'news-ticker' ); ?><br />
+          <?php _e( 'If no category is selected, all categories are included  (Multiple selection)',  'news-ticker' ); ?><br />
           <select style="height: auto;" name="<?php echo $category_filter_opt_name; ?>[]" multiple="multiple">
             <?php 
 			$categories =  get_categories(array('hide_empty' => false));
@@ -679,19 +681,19 @@ tr.gre {
       
       
       <tr valign="top" class="post-extra gre">
-        <th scope="row">Post Selection:</th>
+        <th scope="row"><?php _e( Post Selection:',  'news-ticker' ); ?></th>
         <td><input type="radio" name="<?php echo $type_opt_name; ?>" value='popular' <?php if($type_opt_val=='popular') { echo 'checked'; } ?>>
-          Most Popular Posts over the last
+          <?php _e( 'Most Popular Posts over the last',  'news-ticker' ); ?>
           <input type="text" name="<?php echo $popular_days_opt_name; ?>" value="<?php echo $popular_days_opt_val; ?>" size="2">
           days (<a href='http://wordpress.org/extend/plugins/stats/'>Wordpress.com Stats Plugin</a> <?php echo $stats_installed_str; ?>)<br/>
           <input type="radio" name="<?php echo $type_opt_name; ?>" value='commented' <?php if($type_opt_val=='commented') { echo 'checked'; } ?>>
-          Most Commented Posts<br/>
+         <?php _e( 'Most Commented Posts',  'news-ticker' ); ?><br/>
           <input type="radio" name="<?php echo $type_opt_name; ?>" value='recent' <?php if($type_opt_val=='recent') { echo 'checked'; } ?>>
-          Recent Posts<br/>
+          <?php _e( 'Recent Posts',  'news-ticker' ); ?><br/>
           <input type="radio" name="<?php echo $type_opt_name; ?>" value='recent-comments' <?php if($type_opt_val=='recent-comments') { echo 'checked'; } ?>>
-          Recent Comments<br/>
+          <?php _e( 'Recent Comments',  'news-ticker' ); ?><br/>
           <input type="radio" name="<?php echo $type_opt_name; ?>" value='userspecified' <?php if($type_opt_val=='userspecified') { echo 'checked'; } ?>>
-          Specific Posts:
+          <?php _e( 'Specific Posts:',  'news-ticker' ); ?>
           <input type="text" name="<?php echo $user_specified_posts_opt_name; ?>" value="<?php echo $user_specified_posts_opt_val; ?>" size="20">
           (comma separated, for example: "1, 2, 43, 17")<br/></td>
       </tr>
@@ -704,25 +706,25 @@ tr.gre {
       
       
       
-      <tr class="header" valign="top"><th scope="row"><h3>Ticker Setup</h3></th></tr>
+      <tr class="header" valign="top"><th scope="row"><h3><?php _e( 'Ticker Setup',  'news-ticker' ); ?></h3></th></tr>
 
       <tr valign="top" class="post-extra gre">
-        <th scope="row">News Ticker Contents</th>
+        <th scope="row"><?php _e( 'News Ticker Contents',  'news-ticker' ); ?></th>
         <td>
-          The title of the post is displayed in all cases. You can add the following display options<br />
+          <?php _e( 'The title of the post is displayed by default. Add more elements',  'news-ticker' ); ?><br />
           <input type="checkbox" name="<?php echo $images_opt_name; ?>" <?php if (isset($images_opt_name)) { echo 'value="checked"'; }?> <?php if($images_opt_val=='checked') { echo 'checked'; } ?>>
-          Display Images<br/>
+          <?php _e( 'Show Images',  'news-ticker' ); ?><br/>
           <input type="checkbox" name="<?php echo $dates_opt_name; ?>" <?php if (isset($dates_opt_name)) { echo 'value="checked"'; }?> <?php if($dates_opt_val=='checked') { echo 'checked'; } ?>>
-          Display Dates<br/>
+          <?php _e( 'Show Dates',  'news-ticker' ); ?><br/>
           <input type="checkbox" name="<?php echo $content_opt_name; ?>" <?php if (isset($content_opt_name)) { echo 'value="checked"'; }?> <?php if($content_opt_val=='checked') { echo 'checked'; } ?>>
-          Display Excerpts<br/>
+          <?php _e( 'Show Excerpts',  'news-ticker' ); ?><br/>
           </td>
       </tr>
 
       
       
       <tr valign="top">
-        <th scope="row">Number of Posts:</th>
+        <th scope="row"><?php _e( 'Number of Posts:',  'news-ticker' ); ?></th>
         <td><input type="text" name="<?php echo $num_posts_opt_name; ?>" value="<?php echo $num_posts_opt_val; ?>" size="2">
           posts </td>
       </tr>
@@ -730,20 +732,20 @@ tr.gre {
       
       
       <tr valign="top" class="gre">
-        <th scope="row">Ticker Length:</th>
-        <td> When an excerpt is not set for a post, an excerpt is generated by News-Ticker.<br />
-          Enter how many characters long the auto-excerpt should be.<br />
-          First
+        <th scope="row"><?php _e( 'Ticker Length:',  'news-ticker' ); ?></th>
+        <td> <?php _e( 'When an excerpt is not set for a post, an excerpt is generated by News-Ticker.',  'news-ticker' ); ?><br />
+          <?php _e( 'Enter how many characters long the auto-excerpt should be.',  'news-ticker' ); ?><br />
+          <?php _e( 'First',  'news-ticker' ); ?>
           <input type="text" name="<?php echo $auto_excerpt_length_opt_name; ?>" value="<?php echo $auto_excerpt_length_opt_val; ?>" size="3">
-          characters </td>
+          <?php _e( 'characters',  'news-ticker' ); ?> </td>
       </tr>
       
       
       
       
       <tr valign="top">
-        <th scope="row">Ticker Speed:</th>
-        <td>The speed of ticker transition.<br />
+        <th scope="row"><?php _e( 'Ticker Speed:',  'news-ticker' ); ?></th>
+        <td><?php _e( 'The speed of ticker transition',  'news-ticker' ); ?>.<br />
           <select name="<?php echo $ticker_speed_opt_name; ?>" value="<?php echo $ticker_speed_opt_val; ?>">
             <?php for($j="1"; $j<="10";$j++){
                if($j==$ticker_speed_opt_val){
@@ -752,14 +754,14 @@ tr.gre {
 		 echo "<option value='$j'>$j</option>";
 	       }
        }?>
-          </select> (Seconds)</td>
+          </select> <?php _e( '(Seconds)',  'news-ticker' ); ?></td>
       </tr>
       
       
       
       <tr valign="top" class="gre">
-        <th scope="row">Ticker Timeout:</th>
-        <td>The time between ticker transitions.<br />
+        <th scope="row"><?php _e( 'Ticker Timeout:',  'news-ticker' ); ?></th>
+        <td><?php _e( 'The time between ticker transitions',  'news-ticker' ); ?>.<br />
           <select name="<?php echo $ticker_timeout_opt_name; ?>" value="<?php echo $ticker_timeout_opt_val; ?>">
             <?php for($i="1"; $i<="10";$i++){
                if($i==$ticker_timeout_opt_val){
@@ -768,35 +770,35 @@ tr.gre {
 		 echo "<option value='$i'>$i</option>";
 	       }
        }?>
-          </select> (Seconds)</td>
+          </select> <?php _e( '(Seconds)',  'news-ticker' ); ?></td>
       </tr>
       
       
       
       <tr valign="top">
-        <th scope="row">Ticker Animation:</th>
-        <td> Select the ticker animation.<br />
+        <th scope="row"><?php _e( 'Ticker Animation:',  'news-ticker' ); ?></th>
+        <td> <?php _e( 'Select the ticker animation',  'news-ticker' ); ?>.<br />
           <select name="<?php echo $ticker_anim_opt_name; ?>" value="<?php echo $ticker_anim_opt_val; ?>">
-            <option value="fade" <?php if($ticker_anim_opt_val=='fade'){echo "selected='selected'";} ?>>Fade</option>
-            <option value="fadeZoom" <?php if($ticker_anim_opt_val=='fadeZoom'){echo "selected='selected'";} ?>>Fade and Expand</option>
-            <option value="scrollUp" <?php if($ticker_anim_opt_val=='scrollUp'){echo "selected='selected'";} ?>>Scroll up</option>
-            <option value="scrollDown" <?php if($ticker_anim_opt_val=='scrollDown'){echo "selected='selected'";} ?>>Scroll down</option>
-            <option value="scrollLeft" <?php if($ticker_anim_opt_val=='scrollLeft'){echo "selected='selected'";} ?>>Scroll left</option>
-            <option value="scrollRight" <?php if($ticker_anim_opt_val=='scrollRight'){echo "selected='selected'";} ?>>Scroll right</option>
+            <option value="fade" <?php if($ticker_anim_opt_val=='fade'){echo "selected='selected'";} ?>><?php _e( 'Fade',  'news-ticker' ); ?></option>
+            <option value="fadeZoom" <?php if($ticker_anim_opt_val=='fadeZoom'){echo "selected='selected'";} ?>><?php _e( 'Fade and Expand',  'news-ticker' ); ?></option>
+            <option value="scrollUp" <?php if($ticker_anim_opt_val=='scrollUp'){echo "selected='selected'";} ?>><?php _e( 'Scroll up',  'news-ticker' ); ?></option>
+            <option value="scrollDown" <?php if($ticker_anim_opt_val=='scrollDown'){echo "selected='selected'";} ?>><?php _e( 'Scroll down',  'news-ticker' ); ?></option>
+            <option value="scrollLeft" <?php if($ticker_anim_opt_val=='scrollLeft'){echo "selected='selected'";} ?>><?php _e( 'Scroll left',  'news-ticker' ); ?></option>
+            <option value="scrollRight" <?php if($ticker_anim_opt_val=='scrollRight'){echo "selected='selected'";} ?>><?php _e( 'Scroll right',  'news-ticker' ); ?></option>
           </select></td>
       </tr>
       
       
       <tr valign="top" class="gre">
-        <th scope="row">Ticker Height:</th>
-        <td> Enter the ticker height in pixels. Leave empty to allow container resizing according to the <i>heighest content element</i><br />
+        <th scope="row"><?php _e( 'Ticker Height:',  'news-ticker' ); ?></th>
+        <td> <?php _e( 'Enter the ticker height in pixels. Leave empty to allow container resizing according to the <i>heighest content element</i>',  'news-ticker' ); ?><br />
           <input type="text" name="<?php echo $ticker_ht_opt_name; ?>" value="<?php echo $ticker_ht_opt_val; ?>" size="3">
           </td>
       </tr>
     </table>
     <hr />
     <p class="submit">
-      <input type="submit" name="Submit" value="<?php _e('Update Options', 'ticker_trans_domain' ) ?>" />
+      <input type="submit" name="Submit" value="<?php _e('Update Options', 'news-ticker' ) ?>" />
     </p>
   </form>
 </div>
