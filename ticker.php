@@ -5,7 +5,7 @@ Plugin URI: http://18elements.com/tools/news-ticker-for-wordpress
 Description: Inserts a fading or sliding text banner with Posts, Entries or Comments RSS feeds
 Author: Daniel Sachs
 Author URI: http://18elements.com/
-Version: 2.1.1
+Version: 2.1.2
 */
 /*  
 Copyright 2009-2013 18elements.com  (email: hello@18elements.com)
@@ -24,7 +24,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-define('TICKER_VERSION', '2.1.1');
+define('TICKER_VERSION', '2.1.2');
 define('TICKER_MAX_INT', defined('PHP_INT_MAX') ? PHP_INT_MAX : 32767);
 define('PHPREQ',5);
 
