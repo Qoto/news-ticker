@@ -29,7 +29,7 @@
 
 To view this plugin in action visit [18elements homepage](http://18elements.com).
 
-## Installation procedure
+## Installation
 
 1. Upload `news-ticker` directory to the `/wp-content/plugins/` directory.
 2. Insert `<?php if ( function_exists('insert_newsticker') )  { insert_newsticker(); } ?>` into your template file.
