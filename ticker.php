@@ -418,25 +418,25 @@ function ticker_html_to_text($html) {
 }
 
 function ticker_date_to_human_date($date) {
-  return date('F j, Y', $date);
+  return date_i18n('F j, Y', $date);
 }
 function ticker_date_to_long_human_date($date) {
-  return date('l jS \of F Y', $date);
+  return date_i18n('l jS \of F Y', $date);
 }
 function ticker_date_to_slashed_date($date) {
-  return date('m/d/y', $date);
+  return date_i18n('m/d/y', $date);
 }
 function ticker_date_to_dotted_date($date) {
-  return date('m.d.y', $date);
+  return date_i18n('m.d.y', $date);
 }
 function ticker_date_to_human_time($date) {
-  return date('g:i a', $date);
+  return date_i18n('g:i a', $date);
 }
 function ticker_date_to_long_human_time($date) {
-  return date('g:i:s a', $date);
+  return date_i18n('g:i:s a', $date);
 }
 function ticker_date_to_military_time($date) {
-  return date('H:i:s', $date);
+  return date_i18n('H:i:s', $date);
 }
 function ticker_parse_date($string) {
   preg_match('#([0-9]{1,4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})#', $string, $matches);
