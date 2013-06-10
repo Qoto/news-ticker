@@ -73,7 +73,7 @@ jQuery(document).ready(function(){
 });
 </script>
 <ul id="news-ticker" style="overflow:hidden;">
-  <?php ticker_content($content); ?>
+  <?php ticker_content($content); // check why this line breaks wordpress after 3.4 ?>
 </ul>
 <!-- END TICKER -->
 <?php
