@@ -120,7 +120,8 @@ function ticker_content(){
 						get_option('ticker_type'),
 						get_option('ticker_category_filter'),
 						get_option('ticker_num_posts'),
-						get_option('ticker_user_specified_posts')
+						get_option('ticker_user_specified_posts'),
+						get_option('ticker_custom_post_filter')
 					);
 			break;
 		case 'norss-comments':
@@ -130,7 +131,8 @@ function ticker_content(){
 						get_option('ticker_type'),
 						get_option('ticker_category_filter'),
 						get_option('ticker_num_posts'),
-						get_option('ticker_user_specified_posts')
+						get_option('ticker_user_specified_posts'),
+						get_option('ticker_custom_post_filter')
 					);
 			break;
 		}
@@ -194,7 +196,7 @@ function ticker_recent_comments($src_count, $src_length) {
 	return $posts;
 }
 
-function ticker_get_posts($type, $cat_filter, $n, $post_list=null){
+function ticker_get_posts($type, $cat_filter, $n, $post_list=null, $custom_post_filter='post'){
 	switch($type){
 		case 'popular':
 			$days = get_option('ticker_popular_days');
@@ -214,6 +216,7 @@ function ticker_get_posts($type, $cat_filter, $n, $post_list=null){
 		case 'recent':
 			$posts = get_posts(
 				array(
+					'post_type' => $custom_post_filter,
 					'numberposts' => TICKER_MAX_INT,
 					'orderby' => 'post_date',
 					'suppress_filters' => 0,
@@ -225,6 +228,7 @@ function ticker_get_posts($type, $cat_filter, $n, $post_list=null){
 		case 'commented':
 			$posts = get_posts(
 				array(
+					'post_type' => $custom_post_filter,
 					'numberposts' => TICKER_MAX_INT,
 					'orderby' => 'comment_count',
 					'suppress_filters' => 0,
@@ -235,6 +239,7 @@ function ticker_get_posts($type, $cat_filter, $n, $post_list=null){
 		case 'userspecified':
 			$posts_tmp = get_posts(
 				array(
+					'post_type' => $custom_post_filter,
 					'numberposts' => TICKER_MAX_INT,
 					'include' => $post_list,
 					'suppress_filters' => 0,
@@ -461,6 +466,7 @@ function ticker_set_default_options() {
 	if(get_option('ticker_content')===false)						add_option('ticker_content', '');
 	if(get_option('ticker_type')===false)							add_option('ticker_type', 'commented');
 	if(get_option('ticker_category_filter')===false)				add_option('ticker_category_filter', array());
+  if(get_option('ticker_custom_post_filter')===false)				add_option('ticker_custom_post_filter', array('post'));
 	if(get_option('ticker_user_specified_posts')===false)			add_option('ticker_user_specified_posts', '');
 	if(get_option('ticker_num_posts')===false)						add_option('ticker_num_posts', 5);
 	if(get_option('ticker_popular_days')===false)					add_option('ticker_popular_days', 90);
@@ -480,6 +486,7 @@ function ticker_delete_options() {
 	delete_option('ticker_content');
 	delete_option('ticker_type');
 	delete_option('ticker_category_filter');
+	delete_option('ticker_custom_post_filter');
 	delete_option('ticker_user_specified_posts');
 	delete_option('ticker_num_posts');
 	delete_option('ticker_popular_days');
@@ -505,6 +512,7 @@ function ticker_options_page() {
 	$content_opt_name = 'ticker_content';
 	$type_opt_name = 'ticker_type';
 	$category_filter_opt_name = 'ticker_category_filter';
+	$custom_post_filter_opt_name = 'ticker_custom_post_filter';
 	$user_specified_posts_opt_name = 'ticker_user_specified_posts';
 	$num_posts_opt_name = 'ticker_num_posts';
 	$popular_days_opt_name = 'ticker_popular_days';
@@ -522,6 +530,7 @@ function ticker_options_page() {
 	$content_opt_val = get_option($content_opt_name);
 	$type_opt_val = get_option($type_opt_name);
 	$category_filter_val = get_option($category_filter_opt_name);
+	$custom_post_filter_val = get_option($custom_post_filter_opt_name);
 	$user_specified_posts_opt_val = get_option($user_specified_posts_opt_name);
 	$num_posts_opt_val = get_option($num_posts_opt_name);
 	$popular_days_opt_val = get_option($popular_days_opt_name);
@@ -540,6 +549,7 @@ function ticker_options_page() {
 		$content_opt_val = $_POST[$content_opt_name];
 		$type_opt_val = $_POST[$type_opt_name];
 		$category_filter_val = $_POST[$category_filter_opt_name];
+		$custom_post_filter_val = $_POST[$custom_post_filter_opt_name];
 		$user_specified_posts_opt_val = $_POST[$user_specified_posts_opt_name];
 		$frequency_opt_val = $_POST[$frequency_opt_name];
 		if($_POST[$frequency_opt_name]==null || $_POST[$frequency_opt_name]=='' || $_POST[$frequency_opt_name]<1)
@@ -559,12 +569,17 @@ function ticker_options_page() {
 			echo "<div class='updated' style='background-color:#f66;'><p><a href='options-general.php?page=tickeroptions'>Ticker for Wordpress</a> needs attention: please install the <a href='http://wordpress.org/extend/plugins/stats/'>Wordpress.com Stats</a> plugin to use the 'Most popular' post selection type.  Until the plugin is installed, consider using the 'Most commented' post selection type instead.</p></div>";
 			$type_opt_val = 'commented';
 		}
+		if($type_opt_val=='popular' && (count($custom_post_filter_val) > 1 || $custom_post_filter_val[0] != 'post')) {
+			echo "<div class='updated' style='background-color:#f66;'><p><a href='options-general.php?page=tickeroptions'>Ticker for Wordpress</a> needs attention: Wordpress does not support 'Most popular' post selection for Custom Post types. Instead, consider using the 'Most commented' post selection type.</p></div>";
+			$type_opt_val = 'commented';
+		}
 
 		update_option($images_opt_name, $images_opt_val);
 		update_option($dates_opt_name, $dates_opt_val);
 		update_option($content_opt_name, $content_opt_val);
 		update_option($type_opt_name, $type_opt_val);
 		update_option($category_filter_opt_name, $category_filter_val);
+		update_option($custom_post_filter_opt_name, $custom_post_filter_val);
 		update_option($user_specified_posts_opt_name, $user_specified_posts_opt_val);
 		update_option($num_posts_opt_name, $num_posts_opt_val);
 		update_option($popular_days_opt_name, $popular_days_opt_val);
@@ -633,7 +648,7 @@ tr.gre {
 ?>
 
 		<input class="ruler" type="radio" name="<?php echo $rss_opt_name; ?>" value='norss' <?php if($rss_opt_val=='norss'){echo 'checked';} ?> > <?php _e( '
-		Blog Posts',  'news-ticker' ); ?><br/>
+		Posts',  'news-ticker' ); ?><br/>
 		<input class="ruler" type="radio" name="<?php echo $rss_opt_name; ?>" value='entries' <?php if($rss_opt_val=='entries'){echo 'checked';} ?>>
 		<?php _e( 'Local Entries RSS feed',  'news-ticker' ); ?> <br/>
 		<input class="ruler" type="radio" name="<?php echo $rss_opt_name; ?>" value='comments' <?php if($rss_opt_val=='comments'){echo 'checked';} ?>>
@@ -663,7 +678,7 @@ tr.gre {
 		$categories =  get_categories(array('hide_empty' => false));
 		if($categories!=null) {
 			foreach ($categories as $cat) {
-				if(in_array($cat->cat_ID, $category_filter_val))
+				if(is_array($category_filter_val) && in_array($cat->cat_ID, $category_filter_val))
 					$selected = 'selected="selected"';
 				else
 					$selected = '';
@@ -682,6 +697,34 @@ tr.gre {
 
 
 		<tr valign="top" class="post-extra gre">
+		<th scope="row"><?php _e( 'Post Type Filter:',  'news-ticker' ); ?></th>
+		<td> <?php _e( 'Select the post types to include.  Select one or more post types to restrict post selection to those types.',  'news-ticker' ); ?><br />
+		  <select style="height: auto;" name="<?php echo $custom_post_filter_opt_name; ?>[]" multiple="multiple">
+			<?php
+			$custom_post_types =  get_post_types(array('public' => true, '_builtin' => false), 'objects');
+			// Add the standard Blog Post type 'post'
+			$blog_post_type = get_post_types(array('name' => 'post'), 'objects');
+			$custom_post_types['post'] = $blog_post_type['post'];
+			$custom_post_types['post']->label = 'Blog Posts';
+			if($custom_post_types!=null) {
+				foreach ($custom_post_types as $name => $post_type) {
+					if(in_array($name, $custom_post_filter_val))
+						$selected = 'selected="selected"';
+					else
+						$selected = '';
+
+					$option = '<option value="'.$name.'" '.$selected.'>';
+					$option .= $post_type->label;
+					$option .= '</option>';
+					echo $option;
+				}
+			}
+	?>
+		  </select></td>
+	  </tr>
+
+
+	  <tr valign="top" class="post-extra">
 		<th scope="row"><?php _e( 'Post Selection:',  'news-ticker' ); ?></th>
 		<td><input type="radio" name="<?php echo $type_opt_name; ?>" value='popular' <?php if($type_opt_val=='popular') { echo 'checked'; } ?>>
 			<?php _e( 'Most Popular Posts over the last',  'news-ticker' ); ?>
